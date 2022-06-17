@@ -1,11 +1,12 @@
 import { observable, action, makeAutoObservable } from 'mobx';
-import { getPair } from './service/service';
+import { buyPair, getPair } from './service/service';
 
 export class PairStore {
   constructor() {
     makeAutoObservable(this);
   }
   @observable pairs: any[] | undefined = [];
+  @observable state: string | undefined = '';
 
   @action
   loadPairs = () => {
@@ -16,5 +17,17 @@ export class PairStore {
       const finishAr = filterData(pairs, 'USDT', 'counter');
       this.pairs = [...finishAr];
     });
+  };
+
+  @action buyPairs = () => {
+    this.state = buyPair();
+    switch (this.state) {
+      case 'fail':
+        alert('EROOR! TRY LATER');
+        break;
+      case 'success':
+        alert('ITS OK');
+        break;
+    }
   };
 }
