@@ -5,17 +5,25 @@ import { useRootStore } from '../RootStateContext';
 
 const FormBuy = (props: any) => {
   const { pairStore } = useRootStore();
-  const { pair } = props;
-  const postData = useCallback(async () => {
-    await pairStore.buyPairs(pair);
-  }, []);
+  // const { pair } = props;
   return (
     <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>{`${pair.base} = > ${pair.counter}`}</Form.Label>
+      <Form.Group className="mb-3" controlId="formPair">
+        <Form.Label>Checked pair</Form.Label>
+        <Form.Select>
+          {pairStore.pairs?.map((pair) => {
+            return (
+              <option>
+                {pair.base} {pair.counter}
+              </option>
+            );
+          })}
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formCount">
         <Form.Control type="number" placeholder="Enter count" />
       </Form.Group>
-      <Button variant="primary" onClick={postData}>
+      <Button variant="primary" onClick={pairStore.buyPairs}>
         Buy
       </Button>
     </Form>

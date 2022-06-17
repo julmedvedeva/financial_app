@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useRootStore } from '../RootStateContext';
 import { observer } from 'mobx-react-lite';
 import { Accordion } from 'react-bootstrap';
-import FormBuy from './Form';
+
 
 const PairList = () => {
   const { pairStore } = useRootStore();
@@ -29,7 +29,6 @@ const PairList = () => {
                 <div>{`fee: ${pair.fee}`}</div>
                 <div>{`lpAddress: ${pair.lpAddress}`}</div>
                 <div>{`poolAddress: ${pair.poolAddress}`}</div>
-                <FormBuy pair={pair} />
               </Accordion.Body>
             </Accordion.Item>
           );

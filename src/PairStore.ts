@@ -6,6 +6,7 @@ export class PairStore {
     makeAutoObservable(this);
   }
   @observable pairs: any[] | undefined = [];
+  @observable state: string | undefined = '';
 
   @action
   loadPairs = () => {
@@ -18,8 +19,15 @@ export class PairStore {
     });
   };
 
-  @action
-  buyPairs = (pair: any) => {
-    buyPair(pair);
+  @action buyPairs = () => {
+    this.state = buyPair();
+    switch (this.state) {
+      case 'fail':
+        alert('EROOR! TRY LATER');
+        break;
+      case 'success':
+        alert('ITS OK');
+        break;
+    }
   };
 }
