@@ -5,3 +5,15 @@ export const getPair = () => {
     return res.json();
   });
 };
+
+export const buyPair = (pair: any) => {
+  console.log('pair', pair);
+  return fetch('http://localhost:3000', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(pair),
+  });
+};

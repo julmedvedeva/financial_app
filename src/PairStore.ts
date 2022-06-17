@@ -1,5 +1,5 @@
 import { observable, action, makeAutoObservable } from 'mobx';
-import { getPair } from './service/service';
+import { buyPair, getPair } from './service/service';
 
 export class PairStore {
   constructor() {
@@ -16,5 +16,10 @@ export class PairStore {
       const finishAr = filterData(pairs, 'USDT', 'counter');
       this.pairs = [...finishAr];
     });
+  };
+
+  @action
+  buyPairs = (pair: any) => {
+    buyPair(pair);
   };
 }
