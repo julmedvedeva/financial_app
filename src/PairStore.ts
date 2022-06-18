@@ -11,16 +11,16 @@ export class PairStore {
 
   @action
   loadPairs = () => {
-    setTimeout(() => {
-      getPair().then((pairs) => {
-        const filterData = (arr: any, query: string, ent: string) => {
-          return arr.filter((el: any) => el[ent] === query);
-        };
-        const finishAr = filterData(pairs, 'USDT', 'counter');
-        this.pairs = [...finishAr];
-      });
-      this.isLoading = false;
-    }, 5000);
+    // setTimeout(() => {
+    getPair().then((pairs) => {
+      const filterData = (arr: any, query: string, ent: string) => {
+        return arr.filter((el: any) => el[ent] === query);
+      };
+      const finishAr = filterData(pairs, 'USDT', 'counter');
+      this.pairs = [...finishAr];
+    });
+    this.isLoading = false;
+    // }, 5000);
   };
 
   @action buyPairs = () => {

@@ -14,9 +14,9 @@ const FormBuy = (props: any) => {
       <Form.Group className="mb-3" controlId="formPair">
         <Form.Label>Checked pair</Form.Label>
         <Form.Select>
-          {pairStore.pairs?.map((pair) => {
+          {pairStore.pairs?.map((pair, index) => {
             return (
-              <option>
+              <option key={index}>
                 {pair.base} {pair.counter}
               </option>
             );
