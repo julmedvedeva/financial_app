@@ -17,7 +17,10 @@
     "mobx-react-lite": "^3.4.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
+<<<<<<< HEAD
     "react-confetti": "^6.1.0",
+=======
+>>>>>>> 13aafc2dc49b234f3bf8fedc4528e604e573f2e7
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "^3.1.0",
     "react-scripts": "5.0.1",

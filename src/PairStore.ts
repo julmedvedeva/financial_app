@@ -33,4 +33,16 @@ export class PairStore {
         break;
     }
   };
+
+  @action buyPairs = () => {
+    this.state = buyPair();
+    switch (this.state) {
+      case 'fail':
+        alert('EROOR! TRY LATER');
+        break;
+      case 'success':
+        alert('ITS OK');
+        break;
+    }
+  };
 }

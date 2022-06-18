@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import PairList from './components/allPair';
 import { Container } from 'react-bootstrap';
 import FormBuy from './components/Form';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 function App() {
   return (
