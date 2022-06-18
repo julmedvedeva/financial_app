@@ -1,11 +1,14 @@
 import { observer } from 'mobx-react-lite';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRootStore } from '../RootStateContext';
+import Confetti from 'react-confetti';
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 const FormBuy = (props: any) => {
   const { pairStore } = useRootStore();
-  // const { pair } = props;
+  const { width, height } = useWindowSize();
+
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formPair">
@@ -23,9 +26,22 @@ const FormBuy = (props: any) => {
       <Form.Group className="mb-3" controlId="formCount">
         <Form.Control type="number" placeholder="Enter count" />
       </Form.Group>
-      <Button variant="primary" onClick={pairStore.buyPairs}>
+      <Button
+        variant="primary"
+        onClick={() => {
+          pairStore.buyPairs();
+        }}>
         Buy
       </Button>
+
+      {pairStore.state === 'success' && (
+        <Confetti
+          width={width}
+          height={height}
+          tweenDuration={10}
+          recycle={false}
+        />
+      )}
     </Form>
   );
 };

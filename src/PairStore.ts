@@ -7,16 +7,20 @@ export class PairStore {
   }
   @observable pairs: any[] | undefined = [];
   @observable state: string | undefined = '';
+  @observable isLoading: boolean = true;
 
   @action
   loadPairs = () => {
-    getPair().then((pairs) => {
-      const filterData = (arr: any, query: string, ent: string) => {
-        return arr.filter((el: any) => el[ent] === query);
-      };
-      const finishAr = filterData(pairs, 'USDT', 'counter');
-      this.pairs = [...finishAr];
-    });
+    setTimeout(() => {
+      getPair().then((pairs) => {
+        const filterData = (arr: any, query: string, ent: string) => {
+          return arr.filter((el: any) => el[ent] === query);
+        };
+        const finishAr = filterData(pairs, 'USDT', 'counter');
+        this.pairs = [...finishAr];
+      });
+      this.isLoading = false;
+    }, 5000);
   };
 
   @action buyPairs = () => {
@@ -26,7 +30,6 @@ export class PairStore {
         alert('EROOR! TRY LATER');
         break;
       case 'success':
-        alert('ITS OK');
         break;
     }
   };
