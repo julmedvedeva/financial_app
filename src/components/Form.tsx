@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite';
-import React, { useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRootStore } from '../RootStateContext';
 import Confetti from 'react-confetti';
