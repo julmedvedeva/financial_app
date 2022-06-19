@@ -1,11 +1,10 @@
 import { observer } from 'mobx-react-lite';
-import React, { useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRootStore } from '../RootStateContext';
 import Confetti from 'react-confetti';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
-const FormBuy = (props: any) => {
+const FormBuy = () => {
   const { pairStore } = useRootStore();
   const { width, height } = useWindowSize();
 
@@ -14,13 +13,15 @@ const FormBuy = (props: any) => {
       <Form.Group className="mb-3" controlId="formPair">
         <Form.Label>Checked pair</Form.Label>
         <Form.Select>
-          {pairStore.pairs?.map((pair) => {
-            return (
-              <option>
-                {pair.base} {pair.counter}
-              </option>
-            );
-          })}
+          {pairStore.pairs?.map(
+            (pair: { counter: string; base: string }, index: number) => {
+              return (
+                <option key={index}>
+                  {pair.base} {pair.counter}
+                </option>
+              );
+            },
+          )}
         </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formCount">

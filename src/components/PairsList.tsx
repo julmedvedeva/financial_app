@@ -9,9 +9,11 @@ const PairList = () => {
   const fetchData = useCallback(() => {
     pairStore.loadPairs();
   }, []);
+
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <>
       {pairStore.isLoading ? (
