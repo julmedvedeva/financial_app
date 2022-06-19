@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useRootStore } from '../RootStateContext';
 import { observer } from 'mobx-react-lite';
-import { Accordion } from 'react-bootstrap';
+import { Accordion, Button } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
 
 const PairList = () => {
@@ -20,12 +20,28 @@ const PairList = () => {
         <Skeleton count={5} height={30} />
       ) : (
         <Accordion>
+          <h1>All Pair</h1>
           {pairStore.pairs?.map((pair: any, index: number) => {
             return (
               <Accordion.Item eventKey={index.toString()}>
-                <Accordion.Header>
-                  {`${pair.base} => ${pair.counter}`}
-                </Accordion.Header>
+                <div
+                  style={{
+                    display: 'flex ',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}>
+                  <Accordion.Header>
+                    {`${pair.base} => ${pair.counter}`}
+                  </Accordion.Header>
+                  <div>
+                    <Button
+                      data-id={index}
+                      onClick={() => pairStore.addToFavourite(pair)}>
+                      Favourite
+                    </Button>
+                  </div>
+                </div>
+
                 <Accordion.Body>
                   <div>{`base: ${pair.base}`}</div>
                   <div>{`baseAddress: ${pair.baseAddress}`}</div>

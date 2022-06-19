@@ -8,6 +8,7 @@ export class PairStore {
   @observable pairs: any[] | undefined = [];
   @observable state: string | undefined = '';
   @observable isLoading: boolean = true;
+  @observable favouritePairs: any[] = [];
 
   @action
   loadPairs = () => {
@@ -32,5 +33,22 @@ export class PairStore {
       case 'success':
         break;
     }
+  };
+
+  @action addToFavourite(pair: any) {
+    const pairs = this.gettingToFavourite();
+    pairs!.push(pair);
+    localStorage.setItem('favouritePairs', JSON.stringify(pairs));
+  }
+
+  @action gettingToFavourite = () => {
+    if (localStorage.getItem('favouritePairs') === null) {
+      this.favouritePairs = [];
+    } else {
+      this.favouritePairs = JSON.parse(
+        localStorage.getItem('favouritePairs') || '',
+      );
+    }
+    return this.favouritePairs;
   };
 }

@@ -3,13 +3,22 @@ import { Button, Form } from 'react-bootstrap';
 import { useRootStore } from '../RootStateContext';
 import Confetti from 'react-confetti';
 import useWindowSize from 'react-use/lib/useWindowSize';
+import { useCallback, useEffect } from 'react';
 
 const FormBuy = () => {
   const { pairStore } = useRootStore();
   const { width, height } = useWindowSize();
+  const fetchData = useCallback(() => {
+    pairStore.loadPairs();
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <Form>
+      <h1>Buying form</h1>
       <Form.Group className="mb-3" controlId="formPair">
         <Form.Label>Checked pair</Form.Label>
         <Form.Select>
