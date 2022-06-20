@@ -1,6 +1,8 @@
+import axios from 'axios';
+
 const path = 'https://api.flatqube.io/v1/pairs/meta/';
 
-export const getPair = () => {
+export const getPairs = () => {
   return fetch(path).then((res) => {
     return res.json();
   });
@@ -16,4 +18,14 @@ export const buyPair = () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       return (res = 'fail');
   }
+};
+
+export const getPair = (poolAddress: string) => {
+  return axios({
+    method: 'post',
+    url: `https://api.flatqube.io/v1/pairs/address/${poolAddress}`,
+  }).then((res) => {
+    const response = JSON.parse(JSON.stringify(res)).data;
+    return response;
+  });
 };

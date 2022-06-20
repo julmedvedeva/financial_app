@@ -1,5 +1,5 @@
 import { observable, action, makeAutoObservable } from 'mobx';
-import { buyPair, getPair } from './service/service';
+import { buyPair, getPair, getPairs } from './service/service';
 
 export class PairStore {
   constructor() {
@@ -9,19 +9,22 @@ export class PairStore {
   @observable state: string | undefined = '';
   @observable isLoading: boolean = true;
   @observable favouritePairs: any[] = [];
+  @observable pair: { base?: string; counter?: string; poolAddress: string } = {
+    poolAddress: '',
+  };
 
   @action
   loadPairs = () => {
-    setTimeout(() => {
-      getPair().then((pairs) => {
-        const filterData = (arr: any, query: string, ent: string) => {
-          return arr.filter((el: any) => el[ent] === query);
-        };
-        const finishAr = filterData(pairs, 'USDT', 'counter');
-        this.pairs = [...finishAr];
-      });
-      this.isLoading = false;
-    }, 5000);
+    // setTimeout(() => {
+    getPairs().then((pairs) => {
+      const filterData = (arr: any, query: string, ent: string) => {
+        return arr.filter((el: any) => el[ent] === query);
+      };
+      const finishAr = filterData(pairs, 'USDT', 'counter');
+      this.pairs = [...finishAr];
+    });
+    this.isLoading = false;
+    // }, 5000);
   };
 
   @action buyPairs = () => {
@@ -51,4 +54,13 @@ export class PairStore {
     }
     return this.favouritePairs;
   };
+
+  @action getPair(poolAddress: any) {
+    // this.pair.poolAddress = poolAddress;
+    const a = getPair(poolAddress).then((res) => {
+      this.pair = { ...res };
+      console.log('in store pair', this.pair);
+    });
+    return a;
+  }
 }

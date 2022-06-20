@@ -1,8 +1,14 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import { useRootStore } from '../RootStateContext';
 import { observer } from 'mobx-react-lite';
 import { Accordion, Button } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
+import { Link } from 'react-router-dom';
 
 const PairList = () => {
   const { pairStore } = useRootStore();
@@ -50,6 +56,14 @@ const PairList = () => {
                   <div>{`fee: ${pair.fee}`}</div>
                   <div>{`lpAddress: ${pair.lpAddress}`}</div>
                   <div>{`poolAddress: ${pair.poolAddress}`}</div>
+                  <Link to={`/pair/${pair.poolAddress}`}>
+                    <Button
+                      onClick={() => {
+                        pairStore.getPair(pair?.poolAddress);
+                      }}>
+                      More info
+                    </Button>
+                  </Link>
                 </Accordion.Body>
               </Accordion.Item>
             );
