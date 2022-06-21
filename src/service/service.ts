@@ -29,12 +29,7 @@ export const getPair = async (poolAddress: string) => {
   return await axios({
     method: 'post',
     url: `https://api.flatqube.io/v1/pairs/address/${poolAddress}`,
-  }).then((res) => {
-    // const response = JSON.parse(JSON.stringify(res)).data;
-    const response = res;
-    console.log('in service', response);
-    return response;
-  });
+  }).then((res) => res);
 };
 
 export const getPairDetails = async (id: string) => {

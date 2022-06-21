@@ -67,16 +67,9 @@ export class PairStore {
     runInAction(() => {
       this.setPairLong(data);
     });
-
-    console.log('in store get pair', data);
-    // return data;
   };
 
   setPairLong = (pair: any) => {
     this.pairLong = pair;
   };
-
-  // @action async getPairDetail(id: string) {
-  //   await getPairDetails(id);
-  // }
 }
