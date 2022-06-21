@@ -17,7 +17,14 @@ export class PairStore {
     poolAddress: '',
   };
 
-  @observable pairLong: { fee7d: string; fee24h: string } | undefined;
+  @observable pairLong:
+    | {
+        fee7d: string;
+        fee24h: string;
+        leftLocked?: string;
+        meta: { base: string; counter: string };
+      }
+    | undefined;
 
   @action
   loadPairs = () => {
