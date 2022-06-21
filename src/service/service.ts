@@ -2,6 +2,11 @@ import axios from 'axios';
 
 const path = 'https://api.flatqube.io/v1/pairs/meta/';
 
+const instance = axios.create({
+  baseURL: 'https://api.flatqube.io/v1/pairs/',
+  headers: {},
+});
+
 export const getPairs = () => {
   return fetch(path).then((res) => {
     return res.json();
@@ -20,12 +25,20 @@ export const buyPair = () => {
   }
 };
 
-export const getPair = (poolAddress: string) => {
-  return axios({
+export const getPair = async (poolAddress: string) => {
+  return await axios({
     method: 'post',
     url: `https://api.flatqube.io/v1/pairs/address/${poolAddress}`,
   }).then((res) => {
-    const response = JSON.parse(JSON.stringify(res)).data;
+    // const response = JSON.parse(JSON.stringify(res)).data;
+    const response = res;
+    console.log('in service', response);
     return response;
+  });
+};
+
+export const getPairDetails = async (id: string) => {
+  await instance.post(`/address/${id}`).then((res) => {
+    return res.data;
   });
 };

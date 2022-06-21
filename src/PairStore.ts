@@ -1,5 +1,5 @@
-import { observable, action, makeAutoObservable } from 'mobx';
-import { buyPair, getPair, getPairs } from './service/service';
+import { observable, action, makeAutoObservable, runInAction } from 'mobx';
+import { buyPair, getPair, getPairDetails, getPairs } from './service/service';
 
 export class PairStore {
   constructor() {
@@ -9,9 +9,15 @@ export class PairStore {
   @observable state: string | undefined = '';
   @observable isLoading: boolean = true;
   @observable favouritePairs: any[] = [];
-  @observable pair: { base?: string; counter?: string; poolAddress: string } = {
+  @observable pairShort: {
+    base?: string;
+    counter?: string;
+    poolAddress: string;
+  } = {
     poolAddress: '',
   };
+
+  @observable pairLong: { fee7d: string; fee24h: string } | undefined;
 
   @action
   loadPairs = () => {
@@ -55,12 +61,22 @@ export class PairStore {
     return this.favouritePairs;
   };
 
-  @action getPair(poolAddress: any) {
-    // this.pair.poolAddress = poolAddress;
-    const a = getPair(poolAddress).then((res) => {
-      this.pair = { ...res };
-      console.log('in store pair', this.pair);
+  getPair = async (poolAddress: any) => {
+    this.pairShort.poolAddress = poolAddress;
+    const { data } = await getPair(poolAddress);
+    runInAction(() => {
+      this.setPairLong(data);
     });
-    return a;
-  }
+
+    console.log('in store get pair', data);
+    // return data;
+  };
+
+  setPairLong = (pair: any) => {
+    this.pairLong = pair;
+  };
+
+  // @action async getPairDetail(id: string) {
+  //   await getPairDetails(id);
+  // }
 }

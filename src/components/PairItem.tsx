@@ -1,20 +1,23 @@
-import React, { useCallback } from 'react';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import React, { useCallback, useEffect } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import { useRootStore } from '../RootStateContext';
 
-export const PairItem = (pair: any) => {
+const PairItem = (props: any) => {
   const { pairStore } = useRootStore();
-  // const fetch = useCallback(() => {
-  //   return pairStore.getPair(
-  //     ,
-  //   );
-  // }, []);
-  console.log('pairStore', pairStore.pair);
+
+  useEffect(() => {
+    pairStore.getPair(pairStore.pairShort.poolAddress);
+  }, []);
 
   return (
     <ListGroup>
-      <ListGroupItem>{pairStore.pair?.poolAddress}</ListGroupItem>
+      <ListGroupItem>{pairStore.pairLong?.fee7d}</ListGroupItem>
+      <ListGroupItem>{pairStore.pairLong?.fee24h}</ListGroupItem>
     </ListGroup>
   );
 };
+
+export default observer(PairItem);

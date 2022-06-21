@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Suspense } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import FavouritePairs from './components/FavouritePairs';
-import { PairItem } from './components/PairItem';
+import PairItem from './components/PairItem';
 
 const App = () => {
   return (

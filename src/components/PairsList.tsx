@@ -56,13 +56,10 @@ const PairList = () => {
                   <div>{`fee: ${pair.fee}`}</div>
                   <div>{`lpAddress: ${pair.lpAddress}`}</div>
                   <div>{`poolAddress: ${pair.poolAddress}`}</div>
-                  <Link to={`/pair/${pair.poolAddress}`}>
-                    <Button
-                      onClick={() => {
-                        pairStore.getPair(pair?.poolAddress);
-                      }}>
-                      More info
-                    </Button>
+                  <Link
+                    to={`/pair/${pair.poolAddress}`}
+                    onClick={() => pairStore.getPair(pair.poolAddress)}>
+                    More info
                   </Link>
                 </Accordion.Body>
               </Accordion.Item>
