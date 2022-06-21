@@ -9,8 +9,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Suspense } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import FavouritePairs from './components/FavouritePairs';
+import PairItem from './components/PairItem';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Container className="p-3">
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/" element={<PairList />} />
                 <Route path="/favourite" element={<FavouritePairs />} />
                 <Route path="/form" element={<FormBuy />} />
+                <Route path="/pair/*" element={<PairItem />} />
               </Routes>
             </Suspense>
           </main>
@@ -31,5 +33,5 @@ function App() {
       </Container>
     </Router>
   );
-}
+};
 export default observer(App);

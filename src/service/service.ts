@@ -1,6 +1,13 @@
+import axios from 'axios';
+
 const path = 'https://api.flatqube.io/v1/pairs/meta/';
 
-export const getPair = () => {
+const instance = axios.create({
+  baseURL: 'https://api.flatqube.io/v1/pairs/',
+  headers: {},
+});
+
+export const getPairs = () => {
   return fetch(path).then((res) => {
     return res.json();
   });
@@ -16,4 +23,17 @@ export const buyPair = () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       return (res = 'fail');
   }
+};
+
+export const getPair = async (poolAddress: string) => {
+  return await axios({
+    method: 'post',
+    url: `https://api.flatqube.io/v1/pairs/address/${poolAddress}`,
+  }).then((res) => res);
+};
+
+export const getPairDetails = async (id: string) => {
+  await instance.post(`/address/${id}`).then((res) => {
+    return res.data;
+  });
 };
