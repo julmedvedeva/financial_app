@@ -67,7 +67,6 @@ export class PairStore {
     }
     return this.favouritePairs;
   };
-
   getPair = async (poolAddress: any) => {
     this.pairShort.poolAddress = poolAddress;
     const { data } = await getPair(poolAddress);
