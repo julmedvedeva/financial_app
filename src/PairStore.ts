@@ -1,5 +1,5 @@
 import { observable, action, makeAutoObservable, runInAction } from 'mobx';
-import { buyPair, getPair, getPairDetails, getPairs } from './service/service';
+import { buyPair, getPair, getPairs } from './service/service';
 
 export class PairStore {
   constructor() {
@@ -22,22 +22,39 @@ export class PairStore {
         fee7d: string;
         fee24h: string;
         leftLocked?: string;
-        meta: { base: string; counter: string };
+        feeAllTime?: string;
+        leftPrice?: string;
+        rightLocked?: string;
+        rightPrice?: string;
+        tvl?: string;
+        tvlChange?: string;
+        volume7d?: string;
+        volume24h?: string;
+        volumeChange24h?: string;
+        meta: {
+          base: string;
+          counter: string;
+          baseAddress?: string;
+          counterAddress?: string;
+          fee?: string;
+          lpAddress?: string;
+          poolAddress?: string;
+        };
       }
     | undefined;
 
   @action
   loadPairs = () => {
-    // setTimeout(() => {
-    getPairs().then((pairs) => {
-      const filterData = (arr: any, query: string, ent: string) => {
-        return arr.filter((el: any) => el[ent] === query);
-      };
-      const finishAr = filterData(pairs, 'USDT', 'counter');
-      this.pairs = [...finishAr];
-    });
-    this.isLoading = false;
-    // }, 5000);
+    setTimeout(() => {
+      getPairs().then((pairs) => {
+        const filterData = (arr: any, query: string, ent: string) => {
+          return arr.filter((el: any) => el[ent] === query);
+        };
+        const finishAr = filterData(pairs, 'USDT', 'counter');
+        this.pairs = [...finishAr];
+      });
+      this.isLoading = false;
+    }, 1000);
   };
 
   @action buyPairs = () => {
