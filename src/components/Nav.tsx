@@ -10,8 +10,8 @@ function Navigate() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">All pair</Nav.Link>
-            <Nav.Link href="favourite">Favourite</Nav.Link>
-            <Nav.Link href="form">Buy</Nav.Link>
+            <Nav.Link href="/favourite">Favourite</Nav.Link>
+            <Nav.Link href="/form">Buy</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
