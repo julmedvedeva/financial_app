@@ -8,9 +8,9 @@
 #### С помощью чего сделано:
 
 > - React
-> - [CRA](https://github.com/facebook/create-react-app)
+> - CRA
 > - MobX
-> - Materialize
+> - React Bootstrap
 
 #### Что делает оно:
 
